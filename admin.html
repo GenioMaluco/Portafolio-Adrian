@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin · Portafolio (SQLite)</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <script src="assets/js/theme-init.js"></script>
+  <script src="data/fallback.js" defer></script>
+  <script src="vendor/sql.js/sql-wasm.js" defer></script>
+  <script type="module" src="assets/js/admin.js"></script>
+</head>
+<body class="admin">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="./"><span class="logo-mark" aria-hidden="true">AA</span><span class="logo-text">Admin · Base de datos</span></a>
+      <span id="status" class="status" aria-live="polite">Cargando…</span>
+      <a class="btn btn-ghost btn-sm" href="./?preview=1" target="_blank" rel="noopener">Vista previa</a>
+    </div>
+  </header>
+
+  <main class="container admin-main">
+    <aside class="admin-note">
+      <strong>¿Cómo funciona?</strong> Los cambios se guardan como <em>borrador</em> en tu navegador (IndexedDB).
+      Para publicarlos: <b>Exportar portfolio.db</b> (o <b>seed.sql</b>), reemplaza el archivo en <code>data/</code> y haz <code>git push</code>.
+    </aside>
+
+    <nav class="tabs admin-tabs" role="tablist" aria-label="Secciones de administración">
+      <button class="tab" role="tab" aria-selected="true"  aria-controls="panel-links"    id="tab-links">Enlaces</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-profile"  id="tab-profile">Perfil</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-persons"  id="tab-persons">Personas (Candidatos)</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-projects" id="tab-projects">Proyectos</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-sql"      id="tab-sql">Consola SQL</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-data"     id="tab-data">Exportar / Importar</button>
+    </nav>
+
+    <!-- Enlaces -->
+    <section id="panel-links" class="panel" role="tabpanel" aria-labelledby="tab-links">
+      <h2>Enlaces externos</h2>
+      <p class="muted">Deja la URL vacía para mostrar el enlace como “Próximamente”.</p>
+      <form id="links-form" class="form-grid"></form>
+    </section>
+
+    <!-- Perfil -->
+    <section id="panel-profile" class="panel" role="tabpanel" aria-labelledby="tab-profile" hidden>
+      <h2>Perfil</h2>
+      <form id="profile-form" class="form-grid"></form>
+    </section>
+
+    <!-- Personas / Candidatos -->
+    <section id="panel-persons" class="panel" role="tabpanel" aria-labelledby="tab-persons" hidden>
+      <div class="panel-head">
+        <div>
+          <h2>Tabla <code>persons</code> (Candidatos)</h2>
+          <p class="muted">Perfiles profesionales registrados para modelar portafolios de candidatos.</p>
+        </div>
+      </div>
+      <div class="table-wrap"><table id="persons-table" class="data-table"></table></div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="panel-projects" class="panel" role="tabpanel" aria-labelledby="tab-projects" hidden>
+      <div class="panel-head">
+        <h2>Proyectos</h2>
+        <button id="project-new" class="btn btn-primary btn-sm" type="button">+ Nuevo proyecto</button>
+      </div>
+      <div class="table-wrap"><table id="project-table" class="data-table"></table></div>
+
+      <dialog id="project-dialog" class="dialog">
+        <form id="project-form" method="dialog">
+          <h3 id="project-dialog-title">Proyecto</h3>
+          <div class="form-grid" id="project-fields"></div>
+          <fieldset class="tech-picker">
+            <legend>Tecnologías utilizadas</legend>
+            <div id="tech-picker"></div>
+          </fieldset>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-ghost" value="cancel" id="project-cancel">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
+
+    <!-- Consola SQL -->
+    <section id="panel-sql" class="panel" role="tabpanel" aria-labelledby="tab-sql" hidden>
+      <h2>Consola SQL</h2>
+      <p class="muted">Ejecuta cualquier sentencia SQLite sobre el borrador. <kbd>Ctrl</kbd> + <kbd>Enter</kbd> para ejecutar.</p>
+      <div class="sql-examples" id="sql-examples"></div>
+      <label class="visually-hidden" for="sql-input">Consulta SQL</label>
+      <textarea id="sql-input" class="sql-input" spellcheck="false">SELECT name, category, project_count
+FROM v_technology_usage
+ORDER BY project_count DESC
+LIMIT 15;</textarea>
+      <button id="sql-run" class="btn btn-primary btn-sm" type="button">Ejecutar</button>
+      <div id="sql-output" class="sql-output" aria-live="polite"></div>
+    </section>
+
+    <!-- Exportar / Importar -->
+    <section id="panel-data" class="panel" role="tabpanel" aria-labelledby="tab-data" hidden>
+      <h2>Exportar / Importar</h2>
+      <div class="action-grid">
+        <button id="export-db" class="action-card" type="button"><strong>Exportar portfolio.db</strong><span>Archivo SQLite binario listo para reemplazar <code>data/portfolio.db</code>.</span></button>
+        <button id="export-sql" class="action-card" type="button"><strong>Exportar seed.sql</strong><span>Volcado de datos en SQL legible (ideal para revisar cambios en Git).</span></button>
+        <label class="action-card"><strong>Importar .db</strong><span>Carga una base SQLite existente como borrador.</span><input id="import-db" type="file" accept=".db,.sqlite,application/x-sqlite3" class="visually-hidden"></label>
+        <button id="discard" class="action-card danger" type="button"><strong>Descartar borrador</strong><span>Elimina los cambios locales y recarga la versión publicada.</span></button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

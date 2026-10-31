@@ -1,0 +1,6 @@
+# Normaliza finales de línea y marca la base SQLite como binaria
+* text=auto eol=lf
+*.db     binary
+*.wasm   binary
+*.png    binary
+*.jpg    binary

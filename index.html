@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Adrián Araya Aguilar · Data Engineer, IA y Business Intelligence</title>
+  <meta name="description" content="Portafolio de Adrián Araya Aguilar: ingeniería de datos, modelos de Inteligencia Artificial y soluciones de Business Intelligence. Proyectos, tecnologías y experiencia.">
+  <meta name="author" content="Adrián Araya Aguilar">
+  <meta name="theme-color" content="#0b1020">
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Adrián Araya Aguilar · Data, IA & BI">
+  <meta property="og:description" content="Transformo datos en decisiones: ETL de alto rendimiento, modelos de IA y Business Intelligence.">
+  <meta property="og:image" content="assets/img/Foto de Perfil.jpg">
+  <meta property="og:locale" content="es_CR">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <script src="assets/js/theme-init.js"></script>
+  <script src="data/fallback.js" defer></script>
+  <script src="vendor/sql.js/sql-wasm.js" defer></script>
+  <script type="module" src="assets/js/app.js"></script>
+  <script defer src="assets/js/file-fallback.js"></script>
+</head>
+<body>
+  <!-- Sprite de iconos (Lucide-style, inline para no depender de CDNs) -->
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></g></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></g></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-award" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></g></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></g></symbol>
+      <symbol id="i-database" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></g></symbol>
+      <symbol id="i-brain" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.99.13 4 4 0 0 0-2.53 5.77 4 4 0 0 0 .56 6.6A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.99.13 4 4 0 0 1 2.53 5.77 4 4 0 0 1-.56 6.6A4 4 0 1 1 12 18Z"/><path d="M12 5v13"/></g></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16V11M12 16V7M17 16v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></g></symbol>
+      <symbol id="i-google" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.8C6.2 7.2 8.9 5 12 5Z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.6l3.7 2.9c2.2-2 3.7-5 3.7-8.7Z"/><path fill="#FBBC05" d="M5.3 14.8c-.2-.8-.4-1.6-.4-2.5s.2-1.7.4-2.5L1.6 7C.6 9 0 11.2 0 13.5s.6 4.5 1.6 6.5l3.7-2.9c-.1-.8 0-1.5 0-2.3Z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5l-3.7 2.9C3.5 21.4 7.4 24 12 24Z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <div id="preview-banner" class="preview-banner" hidden>
+    Vista previa del <strong>borrador local</strong> (IndexedDB). <a href="./">Ver versión publicada</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#inicio" aria-label="Inicio">
+        <span class="logo-mark" aria-hidden="true">AA</span>
+        <span class="logo-text">Adrián Araya</span>
+      </a>
+
+      <button id="nav-toggle" class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#tecnologias">Tecnologías</a></li>
+          <li><a href="#experiencia">Experiencia</a></li>
+          <li><a href="#formacion">Formación</a></li>
+          <li><a href="#libro">Libro</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div id="auth-area" class="auth-area">
+        <button id="auth-open-btn" class="btn btn-ghost btn-sm auth-trigger" type="button">
+          <svg class="icon"><use href="#i-user"/></svg>
+          <span>Acceder</span>
+        </button>
+      </div>
+
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+        <svg class="icon icon-moon"><use href="#i-moon"/></svg>
+        <svg class="icon icon-sun"><use href="#i-sun"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ======================================================== HERO -->
+    <section id="inicio" class="hero" aria-labelledby="hero-name">
+      <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="container hero-inner">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p id="hero-availability" class="eyebrow"><span class="pulse" aria-hidden="true"></span> Disponible para nuevos retos</p>
+            <h1 id="hero-name" class="hero-name">Adrián Araya Aguilar</h1>
+            <p id="hero-headline" class="hero-headline gradient-text">Data Engineer · AI Developer · Business Intelligence</p>
+            <p id="hero-tagline" class="hero-tagline"></p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+              <a class="btn btn-ghost" data-link="cv"><svg class="icon"><use href="#i-download"/></svg> Descargar CV</a>
+            </div>
+
+            <div class="social-row" data-social></div>
+          </div>
+
+          <figure class="hero-avatar-wrap">
+            <div class="hero-avatar-ring">
+              <img id="hero-avatar" class="hero-avatar" src="assets/img/Foto de Perfil.jpg" alt="Foto de perfil de Adrián Araya Aguilar" width="260" height="260" fetchpriority="high">
+            </div>
+            <figcaption class="hero-avatar-badge">
+              <svg class="icon"><use href="#i-linkedin"/></svg>
+              <a href="https://www.linkedin.com/in/adrianarayaaguilar/" target="_blank" rel="noopener noreferrer" id="hero-linkedin-badge">@adrianarayaaguilar</a>
+            </figcaption>
+          </figure>
+        </div>
+
+        <dl id="hero-stats" class="hero-stats" aria-label="Indicadores"></dl>
+      </div>
+      <a class="scroll-cue" href="#sobre-mi" aria-label="Ir a Sobre mí"></a>
+    </section>
+
+    <!-- ======================================================== SOBRE MÍ -->
+    <section id="sobre-mi" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">01 · Sobre mí</p>
+          <h2 id="about-title">Datos, Inteligencia Artificial y negocio</h2>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p id="about-summary"></p>
+            <p class="about-meta">
+              <span><svg class="icon"><use href="#i-pin"/></svg> <span id="about-location"></span></span>
+              <a data-email="text" href="#contacto"><svg class="icon"><use href="#i-mail"/></svg> <span class="email-text"></span></a>
+            </p>
+          </div>
+
+          <ul class="focus-list">
+            <li class="focus-card reveal">
+              <svg class="icon icon-lg"><use href="#i-database"/></svg>
+              <h3>Ingeniería de Datos</h3>
+              <p>ETL de alto rendimiento con Python, Spark y SSIS. Optimización SQL y procesamiento masivo de cientos de millones de registros.</p>
+            </li>
+            <li class="focus-card reveal">
+              <svg class="icon icon-lg"><use href="#i-brain"/></svg>
+              <h3>Inteligencia Artificial</h3>
+              <p>Modelos predictivos, visión por computadora con YOLO y NLP. Formación activa en Ingeniería de Inteligencia Artificial.</p>
+            </li>
+            <li class="focus-card reveal">
+              <svg class="icon icon-lg"><use href="#i-chart"/></svg>
+              <h3>Business Intelligence</h3>
+              <p>Dashboards y Balanced Scorecards en Power BI, automatización con Power Platform y RPA para decisiones estratégicas.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== PROYECTOS -->
+    <section id="proyectos" class="section section-alt" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">02 · Proyectos</p>
+          <h2 id="projects-title">Proyectos destacados</h2>
+          <p class="section-sub">Pasa el cursor (o enfoca con el teclado) sobre un proyecto para ver las tecnologías utilizadas.</p>
+        </header>
+
+        <div class="toolbar">
+          <div id="project-tabs" class="tabs" role="tablist" aria-label="Filtrar por tipo de proyecto"></div>
+          <label class="search">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <span class="visually-hidden">Buscar proyectos</span>
+            <input id="project-search" type="search" placeholder="Buscar: Spark, YOLO, Power BI…" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="toolbar-meta">
+          <p id="project-count" class="muted" aria-live="polite"></p>
+          <p id="active-tech" class="active-tech" hidden></p>
+        </div>
+
+        <div id="project-grid" class="project-grid"></div>
+        <p id="project-empty" class="empty" hidden>No hay proyectos que coincidan con el filtro.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================== TECNOLOGÍAS -->
+    <section id="tecnologias" class="section" aria-labelledby="tech-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">03 · Stack tecnológico</p>
+          <h2 id="tech-title">Tecnologías y dónde las he aplicado</h2>
+          <p class="section-sub">El número indica en cuántos proyectos se usó. Haz clic para filtrar los proyectos por esa tecnología.</p>
+        </header>
+        <div id="tech-groups" class="tech-groups"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================== EXPERIENCIA -->
+    <section id="experiencia" class="section section-alt" aria-labelledby="exp-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">04 · Trayectoria</p>
+          <h2 id="exp-title">Experiencia profesional</h2>
+        </header>
+        <ol id="timeline" class="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- ======================================================== FORMACIÓN -->
+    <section id="formacion" class="section" aria-labelledby="edu-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">05 · Formación</p>
+          <h2 id="edu-title">Educación y certificaciones</h2>
+        </header>
+        <div class="edu-grid">
+          <ul id="degrees" class="degrees"></ul>
+          <div>
+            <h3 class="sub-title">Certificaciones</h3>
+            <ul id="certs" class="certs"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== LIBRO -->
+    <section id="libro" class="section section-alt" aria-labelledby="book-title">
+      <div class="container">
+        <div class="book reveal">
+          <div class="book-cover" aria-hidden="true">
+            <span class="book-cover-title">PROYECTO<br>PROTON</span>
+            <span class="book-cover-author">Adrián Araya</span>
+          </div>
+          <div class="book-body">
+            <p class="section-kicker">06 · Escritura</p>
+            <h2 id="book-title">Libro: Proyecto Proton</h2>
+            <p>Una obra propia escrita y versionada como código: capítulos, personajes y un <em>book-builder</em> en Python que compila el manuscrito completo. Ciencia, tecnología y narrativa en un mismo proyecto.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" data-link="book"><svg class="icon"><use href="#i-book"/></svg> Leer el libro</a>
+              <a class="btn btn-ghost" href="https://github.com/GenioMaluco/Proyecto-Proton" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-github"/></svg> Ver repositorio</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== CONTACTO -->
+    <section id="contacto" class="section" aria-labelledby="contact-title">
+      <div class="container contact reveal">
+        <p class="section-kicker">07 · Contacto</p>
+        <h2 id="contact-title">¿Conversamos sobre tu próximo proyecto de datos?</h2>
+        <p class="section-sub">Ingeniería de datos, modelos de IA o soluciones de BI: estaré encantado de ayudarte.</p>
+        <a class="btn btn-primary btn-lg" data-email="text" href="#contacto"><svg class="icon"><use href="#i-mail"/></svg> <span class="email-text">Escríbeme</span></a>
+        <div class="social-row social-row-center" data-social></div>
+      </div>
+    </section>
+
+    <p id="data-status" class="data-status" role="alert" hidden></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Adrián Araya Aguilar</p>
+      <p class="muted">
+        <svg class="icon"><use href="#i-database"/></svg>
+        Contenido servido desde SQLite en tu navegador · fuente: <code id="data-source">—</code>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Modal opcional de Inicio de Sesión / Registro de Candidatos -->
+  <dialog id="auth-dialog" class="auth-dialog" aria-labelledby="auth-dialog-title">
+    <div class="auth-dialog-head">
+      <div>
+        <p class="section-kicker">Plataforma de Candidatos</p>
+        <h2 id="auth-dialog-title">Accede o modela tu perfil profesional</h2>
+      </div>
+      <button id="auth-close-btn" class="icon-btn" type="button" aria-label="Cerrar ventana">×</button>
+    </div>
+
+    <p class="auth-sub">
+      Inicia sesión de forma opcional para crear o personalizar tu portafolio de candidato en la tabla <code>persons</code>.
+    </p>
+
+    <!-- Botón de acceso rápido con Google -->
+    <button id="google-login-btn" class="btn-google" type="button">
+      <svg class="icon"><use href="#i-google"/></svg>
+      <span>Continuar con Google (Acceso rápido)</span>
+    </button>
+
+    <div class="auth-divider"><span>o con tu correo electrónico</span></div>
+
+    <div class="tabs auth-tabs" role="tablist" aria-label="Opciones de acceso">
+      <button class="tab" role="tab" aria-selected="true" id="tab-auth-login" data-auth-tab="login" type="button">Iniciar sesión</button>
+      <button class="tab" role="tab" aria-selected="false" id="tab-auth-register" data-auth-tab="register" type="button">Registrarse</button>
+    </div>
+
+    <p id="auth-feedback" class="auth-feedback" role="alert" hidden></p>
+
+    <!-- Formulario Login -->
+    <form id="login-form" class="auth-form">
+      <label class="auth-field">
+        <span>Correo electrónico</span>
+        <input type="email" name="email" required placeholder="tu.correo@ejemplo.com" autocomplete="email">
+      </label>
+      <label class="auth-field">
+        <span>Contraseña</span>
+        <input type="password" name="password" required placeholder="••••••••" autocomplete="current-password">
+      </label>
+      <button class="btn btn-primary auth-submit" type="submit">Iniciar sesión</button>
+    </form>
+
+    <!-- Formulario Registro (guarda en tabla persons) -->
+    <form id="register-form" class="auth-form" hidden>
+      <div class="auth-grid">
+        <label class="auth-field">
+          <span>Nombre completo *</span>
+          <input type="text" name="full_name" required placeholder="Ej. María Fernández">
+        </label>
+        <label class="auth-field">
+          <span>Correo electrónico *</span>
+          <input type="email" name="email" required placeholder="maria@ejemplo.com" autocomplete="email">
+        </label>
+      </div>
+      <label class="auth-field">
+        <span>Titular profesional (Headline) *</span>
+        <input type="text" name="headline" required placeholder="Ej. Data Analyst · Python · Power BI">
+      </label>
+      <div class="auth-grid">
+        <label class="auth-field">
+          <span>Ubicación</span>
+          <input type="text" name="location" placeholder="San José, Costa Rica">
+        </label>
+        <label class="auth-field">
+          <span>Años de experiencia</span>
+          <input type="number" name="years_exp" min="0" max="50" value="3">
+        </label>
+      </div>
+      <div class="auth-grid">
+        <label class="auth-field">
+          <span>URL de LinkedIn</span>
+          <input type="url" name="linkedin_url" placeholder="https://www.linkedin.com/in/tu-perfil/">
+        </label>
+        <label class="auth-field">
+          <span>Contraseña *</span>
+          <input type="password" name="password" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        </label>
+      </div>
+      <button class="btn btn-primary auth-submit" type="submit">Crear mi perfil de candidato</button>
+    </form>
+  </dialog>
+</body>
+</html>

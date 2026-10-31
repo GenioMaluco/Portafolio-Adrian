@@ -1,0 +1,28 @@
+name: Validar base de datos
+
+on:
+  push:
+    paths: ['data/**', 'scripts/**']
+  pull_request:
+    paths: ['data/**', 'scripts/**']
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validar schema.sql + seed.sql
+        run: python scripts/build_db.py --check
+      - name: Verificar integridad de portfolio.db publicado
+        run: |
+          python - <<'EOF'
+          import sqlite3, sys
+          c = sqlite3.connect('data/portfolio.db')
+          ok = c.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+          n = c.execute('SELECT COUNT(*) FROM projects').fetchone()[0]
+          print(f'integrity={ok} projects={n}')
+          sys.exit(0 if ok and n > 0 else 1)
+          EOF
