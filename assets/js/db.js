@@ -150,6 +150,7 @@ export class PortfolioDB {
     if (!eduCols.has('person_id')) {
       this.db.run('ALTER TABLE education ADD COLUMN person_id INTEGER NOT NULL DEFAULT 1');
     }
+    this.db.run("DELETE FROM projects WHERE slug IN ('proyecto-proton-web', 'cronicas-disociado')");
     const countPersons = this.query('SELECT COUNT(*) AS n FROM persons')[0]?.n ?? 0;
     if (countPersons === 0) {
       this.db.run(`

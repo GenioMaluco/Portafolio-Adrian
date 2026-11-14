@@ -183,15 +183,6 @@ INSERT INTO projects (id, slug, title, summary, impact, category, organization, 
  'Sitio estático sin backend: los datos viven en una base SQLite que se consulta con SQL directamente en el navegador mediante WebAssembly.',
  'Cero servidores · desplegado en GitHub Pages','github',NULL,'2026','https://github.com/GenioMaluco/Portafolio-Adrian',NULL,0,49);
 
--- Proyectos creativos interactivos con portada e imagen destacada
-INSERT INTO projects (id, slug, title, summary, impact, category, organization, year, repo_url, demo_url, image_url, featured, sort_order) VALUES
-(50,'proyecto-proton-web','Proyecto Protón: Libro Interactivo, Audiolibro & Videojuego',
- 'Plataforma web interactiva del Libro 1 Canon: compilador book-builder en Python, lector con seguimiento de progreso, audiolibro Read-Along (TTS/MP3), grafo anti-spoilers de personajes y videojuego demo jugable.',
- 'Lector + Audiolibro Read-Along + Grafo de Personajes + Videojuego','github','Autoría propia','2026','https://github.com/GenioMaluco/Proyecto-Proton-Web','https://geniomaluco.github.io/Proyecto-Proton-Web/','assets/img/proton-portada.png',1,15),
-(51,'cronicas-disociado','Crónicas de un Disociado (Web Cómic Interactivo)',
- 'Web cómic interactivo de stand-up comedy en formato panorámico 16:9 con viñetas secuenciales animadas, efectos de tipeo en vivo, biblia/base de datos de personajes y modo horizontal inteligente.',
- '14 escenas interactivas · Narrativa visual y base de datos de personajes','github','Genio Maluco','2026','https://github.com/GenioMaluco/cronicas-disociado','https://geniomaluco.github.io/cronicas-disociado/#1','assets/img/cronicas-platillo.jpg',1,16);
-
 -- ---------------------------------------------------------------- PROYECTO ↔ TECNOLOGÍA
 INSERT INTO project_technologies (project_id, technology_id)
 SELECT p.id, t.id FROM projects p JOIN technologies t ON 1 = 1 WHERE
@@ -216,9 +207,7 @@ OR (p.slug = 'streamlit-sqlserver'   AND t.name IN ('Python','Streamlit','SQL Se
 OR (p.slug = 'webapp-mvc'            AND t.name IN ('C#','ASP.NET MVC','HTML5 / CSS3','Visual Studio'))
 OR (p.slug = 'pagina-web-flask'      AND t.name IN ('Python','Flask','HTML5 / CSS3','JavaScript','Visual Studio Code'))
 OR (p.slug = 'invitacion-web'        AND t.name IN ('HTML5 / CSS3','JavaScript','Google Apps Script','Docker','Visual Studio Code'))
-OR (p.slug = 'portafolio-sqlite'     AND t.name IN ('SQLite','SQL','JavaScript','HTML5 / CSS3','Python','Git / GitHub','Visual Studio Code'))
-OR (p.slug = 'proyecto-proton-web'   AND t.name IN ('Python','JavaScript','HTML5 / CSS3','SQLite','Git / GitHub','Visual Studio Code'))
-OR (p.slug = 'cronicas-disociado'    AND t.name IN ('JavaScript','HTML5 / CSS3','SQLite','Git / GitHub','Visual Studio Code'));
+OR (p.slug = 'portafolio-sqlite'     AND t.name IN ('SQLite','SQL','JavaScript','HTML5 / CSS3','Python','Git / GitHub','Visual Studio Code'));
 
 -- ---------------------------------------------------------------- EXPERIENCIA
 INSERT INTO experience (id, role, company, period, sort_order) VALUES
