@@ -284,6 +284,14 @@ code { font-family: var(--font-mono); font-size: .85em; }
 @keyframes card-in { from { opacity: 0; transform: translateY(10px); } }
 
 .project-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .9rem; }
+.project-thumb-wrap {
+  margin: -.4rem -.4rem 1rem; border-radius: calc(var(--radius-lg) - 6px); overflow: hidden;
+  aspect-ratio: 16 / 9; background: var(--bg); border: 1px solid var(--border);
+}
+.project-thumb {
+  width: 100%; height: 100%; object-fit: cover; transition: transform .35s var(--ease);
+}
+.project-card:hover .project-thumb { transform: scale(1.04); }
 .badge {
   display: inline-block; padding: .2rem .65rem; border-radius: 999px; font-size: .72rem; font-weight: 600;
   letter-spacing: .04em; text-transform: uppercase; color: var(--cat, var(--accent));
@@ -379,22 +387,35 @@ body:not(.is-ready) .project-tech-inline { display: flex; }
 .cert span { color: var(--text-muted); }
 .cert strong { color: var(--text); }
 
-/* ------------------------------------------------------------- Libro */
+/* ------------------------------------------------------------- Libro & Web Cómic */
+.creative-stack { display: grid; gap: 3.5rem; }
 .book { display: grid; grid-template-columns: auto 1fr; gap: 3rem; align-items: center; }
-.book-cover {
-  width: 200px; aspect-ratio: 2 / 3; border-radius: 6px 14px 14px 6px; padding: 1.4rem 1.2rem;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background:
-    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, .35) 0 6%, transparent 7%),
-    radial-gradient(circle at 70% 30%, transparent 0 18%, rgba(255, 255, 255, .25) 19% 20%, transparent 21%),
-    linear-gradient(160deg, #1e1b4b, #4c1d95 55%, #0e7490);
-  box-shadow: inset 6px 0 10px rgba(0, 0, 0, .35), var(--shadow);
-  transform: perspective(800px) rotateY(-12deg); transition: transform .4s var(--ease);
+.book-cover-link { display: block; }
+.book-cover-img {
+  width: 210px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 8px 14px 14px 8px;
+  border: 1px solid var(--border); box-shadow: var(--shadow);
+  transform: perspective(800px) rotateY(-10deg); transition: transform .4s var(--ease);
 }
-.book-cover:hover { transform: perspective(800px) rotateY(0); }
-.book-cover-title { color: #fff; font-weight: 800; font-size: 1.5rem; letter-spacing: .08em; line-height: 1.1; margin-top: auto; }
-.book-cover-author { color: rgba(255, 255, 255, .75); font-family: var(--font-mono); font-size: .75rem; margin-top: .8rem; }
-.book-body p { color: var(--text-muted); max-width: 620px; }
+.book-cover-link:hover .book-cover-img { transform: perspective(800px) rotateY(0) scale(1.02); }
+.book-body p { color: var(--text-muted); max-width: 640px; }
+
+.comic-showcase {
+  display: grid; grid-template-columns: minmax(280px, 440px) 1fr; gap: 3rem; align-items: center;
+  padding-top: 3rem; border-top: 1px solid var(--border);
+}
+.comic-frame-link { display: block; text-decoration: none; }
+.comic-frame-link:hover { text-decoration: none; }
+.comic-frame {
+  margin: 0; position: relative; border-radius: var(--radius); overflow: hidden;
+  border: 4px solid #111; box-shadow: 8px 8px 0 #ffcc00, var(--shadow);
+  background: #0d0d12; transition: transform .3s var(--ease);
+}
+.comic-frame-link:hover .comic-frame { transform: translateY(-4px) rotate(-1deg); }
+.comic-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.comic-caption {
+  padding: .45rem .85rem; background: #ffcc00; color: #111; font-weight: 800; font-size: .84rem;
+  letter-spacing: .03em; border-top: 3px solid #111;
+}
 
 /* ------------------------------------------------------------- Contacto & footer */
 .contact { text-align: center; max-width: 760px; }
@@ -493,8 +514,8 @@ body:not(.is-ready) .project-tech-inline { display: flex; }
 @media (max-width: 640px) {
   .container { width: calc(100% - 2rem); }
   .hero-name { font-size: clamp(2rem, 9vw, 2.8rem); overflow-wrap: break-word; }
-  .book { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-  .book .hero-actions { justify-content: center; }
+  .book, .comic-showcase { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .book .hero-actions, .comic-showcase .hero-actions { justify-content: center; }
   .project-grid, .tech-groups { grid-template-columns: 1fr; }
   .hero-stats { gap: 1.5rem; }
   .search { width: 100%; }

@@ -21,6 +21,7 @@ const PROJECT_FIELDS = [
   { name: 'repo_url', label: 'URL repositorio', type: 'url' },
   { name: 'demo_url', label: 'URL demo', type: 'url' },
   { name: 'linkedin_url', label: 'URL publicación LinkedIn', type: 'url', wide: true },
+  { name: 'image_url', label: 'Ruta de imagen / portada (ej. assets/img/...)', wide: true },
   { name: 'sort_order', label: 'Orden', type: 'number' },
   { name: 'featured', label: 'Destacado', type: 'checkbox' },
 ];
@@ -247,21 +248,21 @@ function saveProject(id, data) {
     const s = String(data.get(k) ?? '').trim();
     return s === '' ? null : s;
   };
-  for (const k of ['repo_url', 'demo_url', 'linkedin_url']) {
+  for (const k of ['repo_url', 'demo_url', 'linkedin_url', 'image_url']) {
     if (v(k) && !safeUrl(v(k))) throw new Error(`URL inválida en ${k}`);
   }
   const values = [v('slug'), v('title'), v('summary'), v('impact'), v('category'), v('organization'), v('year'),
-    v('repo_url'), v('demo_url'), v('linkedin_url'), data.has('featured') ? 1 : 0, Number(v('sort_order') ?? 0)];
+    v('repo_url'), v('demo_url'), v('linkedin_url'), v('image_url'), data.has('featured') ? 1 : 0, Number(v('sort_order') ?? 0)];
   const techIds = data.getAll('tech').map(Number);
 
   db.transaction(() => {
     let projectId = id;
     if (id) {
       db.run(`UPDATE projects SET slug=?, title=?, summary=?, impact=?, category=?, organization=?, year=?,
-              repo_url=?, demo_url=?, linkedin_url=?, featured=?, sort_order=? WHERE id = ?`, [...values, id]);
+              repo_url=?, demo_url=?, linkedin_url=?, image_url=?, featured=?, sort_order=? WHERE id = ?`, [...values, id]);
     } else {
       db.run(`INSERT INTO projects (slug, title, summary, impact, category, organization, year,
-              repo_url, demo_url, linkedin_url, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`, values);
+              repo_url, demo_url, linkedin_url, image_url, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`, values);
       projectId = db.query('SELECT last_insert_rowid() AS id')[0].id;
     }
     db.run('DELETE FROM project_technologies WHERE project_id = ?', [projectId]);

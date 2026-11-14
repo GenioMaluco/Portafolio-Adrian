@@ -252,12 +252,15 @@ function projectCard(p) {
   const repo = safeUrl(p.repo_url);
   const demo = safeUrl(p.demo_url);
   const linkedin = safeUrl(p.linkedin_url);
+  const img = safeUrl(p.image_url);
 
   const card = h('article', {
     class: `project-card cat-${p.category}${p.featured ? ' is-featured' : ''}`,
     tabindex: '0',
     'aria-label': `${p.title}. Tecnologías: ${p.technologies.map((t) => t.name).join(', ')}`,
   },
+  img ? h('div', { class: 'project-thumb-wrap' },
+    h('img', { class: 'project-thumb', src: img, alt: p.title, loading: 'lazy' })) : null,
   h('header', { class: 'project-head' },
     h('span', { class: 'badge' }, CATEGORY_LABELS[p.category]),
     p.year ? h('span', { class: 'project-year' }, p.year) : null),

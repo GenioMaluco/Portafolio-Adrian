@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS projects (
   repo_url     TEXT,
   demo_url     TEXT,
   linkedin_url TEXT,                      -- publicación de LinkedIn sobre el proyecto
+  image_url    TEXT,                      -- imagen o portada opcional del proyecto
   featured     INTEGER NOT NULL DEFAULT 0 CHECK (featured IN (0,1)),
   sort_order   INTEGER NOT NULL DEFAULT 0
 );

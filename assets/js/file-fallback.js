@@ -122,6 +122,12 @@ window.addEventListener('DOMContentLoaded', function () {
     grid.innerHTML = '';
     list.forEach(function (pr) {
       var card = h('article', 'project-card cat-' + pr.category + (pr.featured ? ' is-featured' : ''));
+      if (pr.image_url) {
+        var tw = h('div', 'project-thumb-wrap');
+        var ti = h('img', 'project-thumb');
+        ti.src = pr.image_url; ti.alt = pr.title; ti.loading = 'lazy';
+        tw.append(ti); card.append(tw);
+      }
       var head = h('header', 'project-head');
       head.append(h('span', 'badge', CAT[pr.category]));
       if (pr.year) head.append(h('span', 'project-year', pr.year));

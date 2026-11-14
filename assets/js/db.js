@@ -139,6 +139,9 @@ export class PortfolioDB {
     if (!projCols.has('linkedin_url')) {
       this.db.run('ALTER TABLE projects ADD COLUMN linkedin_url TEXT');
     }
+    if (!projCols.has('image_url')) {
+      this.db.run('ALTER TABLE projects ADD COLUMN image_url TEXT');
+    }
     const expCols = cols('experience');
     if (!expCols.has('person_id')) {
       this.db.run('ALTER TABLE experience ADD COLUMN person_id INTEGER NOT NULL DEFAULT 1');
@@ -240,7 +243,7 @@ export class PortfolioDB {
     const params = personId ? [personId] : [];
     const projects = this.query(`
       SELECT id, person_id, slug, title, summary, impact, category, organization, year,
-             repo_url, demo_url, linkedin_url, featured
+             repo_url, demo_url, linkedin_url, image_url, featured
       FROM projects
       ${where}
       ORDER BY featured DESC, sort_order, title`, params);

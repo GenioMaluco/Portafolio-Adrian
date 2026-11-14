@@ -34,7 +34,7 @@ def export_snapshot(conn: sqlite3.Connection) -> dict:
 
     projects = q(
         "SELECT id, person_id, slug, title, summary, impact, category, organization, year, "
-        "repo_url, demo_url, linkedin_url, featured FROM projects ORDER BY featured DESC, sort_order, title"
+        "repo_url, demo_url, linkedin_url, image_url, featured FROM projects ORDER BY featured DESC, sort_order, title"
     )
     tech_rows = q(
         "SELECT pt.project_id, t.id, t.name, t.category FROM project_technologies pt "
